@@ -39,12 +39,19 @@ export default {
 
     axios.get('https://ludanxer.top/projects/weather/data.txt', {cache: false})
     .then(function(response){
+      element.$message({
+        message: 'success!',
+        type: 'success'
+      });
       let data = response.data.split('\n');
       element.humidity += data[0];
       element.wind += (data[1] + myMap.get(Number(data[1][3])));
       element.ray += data[2];
       element.temperature = '温度：' + data[3] + element.temperature;
       element.updatetime += data[4]
+    })
+    .catch(function () {
+      element.$message.error('糟糕，哪里出了点问题！');
     });
   }
 }

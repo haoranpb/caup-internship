@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Weather from './views/Weather.vue'
 import Txt from './views/TxtGetter.vue'
-import AutoMail from './views/AutoMail.vue'
+import Display from './views/Display.vue'
 
 Vue.use(Router)
 
@@ -21,9 +21,9 @@ export default new Router({
       component: Txt
     },
     {
-      path: '/auto-mail',
-      name: 'automail',
-      component: AutoMail
+      path: '/display',
+      name: 'display',
+      component: Display
     }
   ]
 })

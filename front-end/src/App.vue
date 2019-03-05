@@ -5,7 +5,7 @@
         <div class="nav">
           <router-link to="/">天气情况</router-link>
           <router-link to="txt-getter">TXT生成器</router-link>
-          <router-link to="auto-mail">自动邮件</router-link>
+          <router-link to="display">气象展示系统</router-link>
         </div>
       </el-header>
       <el-main>
