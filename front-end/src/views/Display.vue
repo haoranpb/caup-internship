@@ -1,5 +1,6 @@
 <template>
   <div id="display">
+    <router-view></router-view>
     <el-pagination
       background
       layout="prev, pager, next"
@@ -10,13 +11,18 @@
 </template>
 
 <script>
-
 export default {
   name: 'display',
   methods: {
     pageChange: function(page){
-      console.log(page); // router.push()...
+      this.$router.push('/display/d' + page);
     }
   }
 }
 </script>
+
+<style scoped>
+.el-pagination {
+  margin-top: 2%;
+}
+</style>

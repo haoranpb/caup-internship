@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="show-info">
     <div class="title">
       <p>上海市徐家汇区天气情况</p>
       <p>更新时间：{{ updatetime }}</p>
@@ -37,7 +37,7 @@ export default {
     myMap.set(6, ' 强风 10.8-13.8');
     myMap.set(7, ' 劲风（疾风） 13.9-17.1');
 
-    axios.get('https://ludanxer.top/projects/weather/data.txt', {cache: false})
+    axios.get('https://ludanxer.top/projects/caup/data.txt', {cache: false})
     .then(function(response){
       element.$message({
         message: 'success!',
