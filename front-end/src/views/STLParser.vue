@@ -2,7 +2,7 @@
   <div id="stl">
     <el-upload
       drag
-      action="http://127.0.0.1:8000/upload"
+      action="http://ludanxer.top:10000/upload"
       :on-success="download"
       multiple>
       <i class="el-icon-upload"></i>
@@ -60,7 +60,7 @@ export default {
 
       let obj = this;
 
-      axios.get('http://127.0.0.1:8000/min-max')
+      axios.get('http://ludanxer.top:10000/min-max')
       .then(function(response) {
         obj.tableData[0].min = response.data['x-min'];
         obj.tableData[0].max = response.data['x-max'];

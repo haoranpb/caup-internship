@@ -8,12 +8,16 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
+@app.route('/', methods=['GET'])
+def test():
+    return 'Hello World'
+
 @app.route('/upload', methods=['POST'])
 def upload_file():
     stl_file = request.files['file']
     stl_file.save(os.path.join('./', 'temp.stl'))
-    with open(os.path.join('./', 'parsed.stl'), 'w') as out_file:
-        with open(os.path.join('./', 'temp.stl'), 'r') as in_file:
+    with open(os.path.join('./', 'parsed.stl'), 'w', encoding="utf-8") as out_file:
+        with open(os.path.join('./', 'temp.stl'), 'r', encoding="utf-8") as in_file:
             for line in in_file:
                 if 'vertex' in line:
                     numbers = line.strip().split()
@@ -33,7 +37,7 @@ def upload_file():
 def min_max():
     MAX = [0, -9999, -9999, -9999]
     MIN = [0, 9999, 9999, 9999]
-    with open(os.path.join('./', 'parsed.stl'), 'r') as file:
+    with open(os.path.join('./', 'parsed.stl'), 'r', encoding="utf-8") as file:
         for line in file:
             if 'vertex' in line:
                 numbers = line.strip().split()
