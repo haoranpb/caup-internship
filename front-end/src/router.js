@@ -8,6 +8,7 @@ import Display2 from './components/display-2.vue'
 import Display3 from './components/display-3.vue'
 import Display4 from './components/display-4.vue'
 import Display5 from './components/display-5.vue'
+import STLParser from './views/STLParser.vue'
 
 Vue.use(Router)
 
@@ -24,6 +25,11 @@ export default new Router({
       path: '/txt-getter',
       name: 'txt-getter',
       component: Txt
+    },
+    {
+      path: '/stlparser',
+      name: 'stlparser',
+      component: STLParser
     },
     {
       path: '/display',
