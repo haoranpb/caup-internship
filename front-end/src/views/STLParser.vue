@@ -2,7 +2,7 @@
   <div id="stl">
     <el-upload
       drag
-      action="http://ludanxer.top:10000/upload"
+      action="http://ludanxer.top:10000/stl-upload"
       :on-success="download"
       multiple>
       <i class="el-icon-upload"></i>

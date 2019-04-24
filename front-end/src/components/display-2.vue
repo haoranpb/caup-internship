@@ -2,80 +2,63 @@
   <div id="display-2">
     <el-row>
       <el-col :span="12">
-        <div>
+        <div style="position: relative;left: 30%;">
           <p>2-a</p>
           <img class="img" src="@/assets/2-a.png" alt="2-a" />
         </div>
       </el-col>
       <el-col :span="12">
-        <div>
+        <div style="position: relative;right: 30%;">
           <p>2-b</p>
           <img class="img" src="@/assets/2-b.png" alt="2-b" />
         </div>
       </el-col>
     </el-row>
     <el-row type="flex" justify="center">
-      <el-table
-        class="weatherTable"
-        :data="tableData"
-        style="width: 100%">
-        <el-table-column
-          prop="type"
-          label="数据类型\数据来源"
-          width="180">
-        </el-table-column>
-        <el-table-column
-          prop="name"
-          label="徐汇网站"
-          width="180">
-        </el-table-column>
-        <el-table-column
-          prop="name"
-          label="1865气象站"
-          width="180">
-        </el-table-column>
-        <el-table-column
-          prop="name"
-          label="1866气象站">
-        </el-table-column>
+      <el-table class="weatherTable" :data="tableData" style="width: 100%">
+        <el-table-column prop="type" label="数据类型\数据来源" width="180"></el-table-column>
+        <el-table-column prop="datax" label="徐汇网站" width="180"></el-table-column>
+        <el-table-column prop="data5" label="1865气象站" width="180"></el-table-column>
+        <el-table-column prop="data6" label="1866气象站"></el-table-column>
       </el-table>
     </el-row>
   </div>
 </template>
 
 <script>
-import ShowInfo from '@/components/ShowInfo.vue'
-
+import axios from 'axios'
 
 export default {
   name: 'display-2',
-  components: {
-    ShowInfo
-  },
   data() {
     return {
       tableData: [{
         type: 'PM2.5',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        type: '风向',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1517 弄'
-      }, {
-        type: '风速',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1519 弄'
-      }, {
-        type: '空气湿度',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄'
-      }, {
-        type: '环境湿度',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄'
+        datax: 'datax',
+        data5: 'data5',
+        data6: 'data6'
       }]
     }
+  },
+  mounted: function(){
+    let obj = this;
+
+    axios.get('http://127.0.0.1:8000/crawl-data')
+    .then(function(response) {
+      let data = response.data;
+      let labels = ['PM2.5(ug/m3)', '环境湿度(%)', '空气温度(℃)', '风向(度)', '风速(m/s)'];
+      obj.tableData = [];
+      for(let label of labels){
+        let tmp = {};
+        tmp['type'] = label;
+        tmp['data5'] = data['1865'][label];
+        tmp['data6'] = data['1866'][label];
+        obj.tableData.push(tmp);
+      }
+    })
+    .catch(function () {
+      obj.$message.error('糟糕，哪里出了点问题！');
+    });
   }
 }
 </script>

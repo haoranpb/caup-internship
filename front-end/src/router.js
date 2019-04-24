@@ -9,6 +9,7 @@ import Display3 from './components/display-3.vue'
 import Display4 from './components/display-4.vue'
 import Display5 from './components/display-5.vue'
 import STLParser from './views/STLParser.vue'
+import Mail from './views/Mail.vue'
 
 Vue.use(Router)
 
@@ -20,6 +21,11 @@ export default new Router({
       path: '/',
       name: 'weather',
       component: Weather
+    },
+    {
+      path: '/mail',
+      name: 'mail',
+      component: Mail
     },
     {
       path: '/txt-getter',
