@@ -6,7 +6,7 @@
       </el-form-item>
       <div>
         <el-upload class="recievers" drag :on-success='displayReciever'
-          action="http://127.0.0.1:8000/recievers-upload">
+          action="http://ludanxer.top:10000/recievers-upload">
           <i class="el-icon-upload"></i>
           <div class="el-upload__text">请重命名为：reciever.txt！<em>点击上传</em></div>
           <div class="el-upload__tip" slot="tip">只能上传txt文件，每行一个收件邮箱</div>
@@ -27,11 +27,11 @@
         <el-input v-model="form.time" placeholder="默认为61，单位秒（s）。请输入纯数字" ></el-input>
       </el-form-item>
       <el-upload class="attachment" drag :on-success='attachmentUpload'
-        action="http://127.0.0.1:8000/attachment-upload"
+        action="http://ludanxer.top:10000/attachment-upload"
         multiple>
         <i class="el-icon-upload"></i>
-        <div class="el-upload__text">在此处上传收件人文件，<em>点击上传</em></div>
-        <div class="el-upload__tip" slot="tip">只能上传txt文件，每行一个收件邮箱</div>
+        <div class="el-upload__text">在此处上传 pdf 附件，<em>点击上传</em></div>
+        <div class="el-upload__tip" slot="tip">只能上传pdf文件</div>
       </el-upload>
       <el-form-item label="邮件正文">
         <el-input autosize type="textarea" v-model="form.content" placeholder="请输入邮件正文"></el-input>
@@ -79,9 +79,17 @@ export default {
         params.append('time', obj.form.time);
         params.append('attachment', obj.attachment);
 
+        obj.$message('开始发送邮件！');
+        obj.form = {
+          title: '',
+          usr: '',
+          pwd: '',
+          content: '',
+          time: 60
+        };
         axios({
           method: 'post',
-          url: 'http://127.0.0.1:8000/send-mail',
+          url: 'http://ludanxer.top:10000/send-mail',
           data: params,
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         })

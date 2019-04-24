@@ -1,3 +1,4 @@
+#-*- coding: utf-8 -*-
 """
     Micro Server For CAUP Front End
 """
@@ -51,7 +52,7 @@ def upload_stl():
 
 
 @app.route('/recievers-upload', methods=['POST'])
-def upload_recievers(): # txt 文件，每行一个收件人
+def upload_recievers():
     recievers = request.files['file']
     filename = secure_filename(recievers.filename)
     recievers.save(os.path.join('./', filename))
@@ -63,7 +64,7 @@ def upload_recievers(): # txt 文件，每行一个收件人
 
 
 @app.route('/attachment-upload', methods=['POST'])
-def upload_attachment(): # txt 文件，每行一个收件人
+def upload_attachment():
     attachment = request.files['file']
     filename = secure_filename(attachment.filename)
     attachment.save(os.path.join('./', filename))
@@ -71,7 +72,7 @@ def upload_attachment(): # txt 文件，每行一个收件人
 
 
 @app.route('/send-mail', methods=['POST'])
-def send_mail(): # 发送邮件，很多邮箱可能发送不成功，之类的
+def send_mail():
     document = {
         'usr': request.form['usr'],
         'pwd': request.form['pwd'],
@@ -80,16 +81,18 @@ def send_mail(): # 发送邮件，很多邮箱可能发送不成功，之类的
         'content': request.form['content'],
         'attachment': request.form['attachment']
     }
+
     app.config['MAIL_USERNAME'] = document['usr']
     app.config['MAIL_PASSWORD'] = document['pwd']
     app.config['MAIL_SERVER'] = 'smtp.' + document['usr'].split('@')[1]
     app.config['MAIL_DEFAULT_SENDER'] = document['usr']
+    app.config['MAIL_PORT'] = 465
+    app.config['MAIL_USE_SSL'] = True
 
     mail = Mail(app)
     msg = Message(document['title'])
     msg.body = document['content']
 
-    # 添加附件
     if len(document['attachment']) > 0:
         with app.open_resource(document['attachment']) as fp:
             msg.attach(document['attachment'], "application/pdf", fp.read())
@@ -98,7 +101,7 @@ def send_mail(): # 发送邮件，很多邮箱可能发送不成功，之类的
     with open(os.path.join('./', 'reciever.txt'), 'r', encoding="utf-8") as file:
         for line in file:
             recievers.append(line.strip('\n'))
-
+    print('here')
     for i in range(len(recievers)):
         msg.recipients = [recievers[i]]
         mail.send(msg)

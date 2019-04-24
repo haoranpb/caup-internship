@@ -43,7 +43,7 @@ export default {
   mounted: function(){
     let obj = this;
 
-    axios.get('http://127.0.0.1:8000/crawl-data')
+    axios.get('http://ludanxer.top:10000/crawl-data')
     .then(function(response) {
       let data = response.data;
       let labels = ['PM2.5(ug/m3)', '环境湿度(%)', '空气温度(℃)', '风向(度)', '风速(m/s)'];
