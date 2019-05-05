@@ -26,7 +26,7 @@ index_1 = element.find('湿度')
 index_2 = element.find('风向')
 index_3 = element.find('紫外线')
 
-humidity = element[index_1 + 3: index_2]
+humidity = element[index_1 + 3: index_2 - 1]
 wind = element[index_2 + 3: index_3]
 ray = element[index_3 + 4: ]
 wind_direction, wind_speed = wind.split()
