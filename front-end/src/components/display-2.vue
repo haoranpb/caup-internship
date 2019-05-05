@@ -32,12 +32,7 @@ export default {
   name: 'display-2',
   data() {
     return {
-      tableData: [{
-        type: 'PM2.5',
-        datax: 'datax',
-        data5: 'data5',
-        data6: 'data6'
-      }]
+      tableData: []
     }
   },
   mounted: function(){
@@ -51,26 +46,27 @@ export default {
       for(let label of labels){
         let tmp = {};
         tmp['type'] = label;
+        tmp['datax'] = 'datax';
         tmp['data5'] = data['1865'][label];
         tmp['data6'] = data['1866'][label];
         obj.tableData.push(tmp);
       }
+
+      axios.get('http://ludanxer.top/projects/caup/xuhui.txt')
+      .then(function(r) {
+        let data = r.data.split('\n');
+        for(let i in data){
+          let tmp = data[i].split(' ');
+          obj.tableData[i]['datax'] = tmp[1];
+        }
+      })
+      .catch(function () {
+        obj.$message.error('糟糕，哪里出了点问题！');
+      }); 
     })
     .catch(function () {
       obj.$message.error('糟糕，哪里出了点问题！');
     });
-
-    axios.get('http://ludanxer.top/projects/caup/xuhui.txt')
-    .then(function(response) {
-      let data = response.data.split('\n');
-      for(let i in data){
-        let tmp= data[i].split(' ');
-        obj.tableData[i]['datax'] = tmp[1];
-      }
-    })
-    .catch(function () {
-      obj.$message.error('糟糕，哪里出了点问题！');
-    });    
   }
 }
 </script>
