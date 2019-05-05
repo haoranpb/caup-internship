@@ -59,6 +59,18 @@ export default {
     .catch(function () {
       obj.$message.error('糟糕，哪里出了点问题！');
     });
+
+    axios.get('http://ludanxer.top/projects/caup/xuhui.txt')
+    .then(function(response) {
+      let data = response.data.split('\n');
+      for(let i in data){
+        let tmp= data[i].split(' ');
+        obj.tableData[i]['datax'] = tmp[1];
+      }
+    })
+    .catch(function () {
+      obj.$message.error('糟糕，哪里出了点问题！');
+    });    
   }
 }
 </script>
