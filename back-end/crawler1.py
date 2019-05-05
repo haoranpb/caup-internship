@@ -38,6 +38,6 @@ pm = pm[index_1 + 4: index_2]
 with open('./xuhui.txt', 'w', encoding='utf-8') as file:
     file.write('PM2.5(ug/m3) ' + pm + '\n')
     file.write('环境湿度(%) ' + humidity + '\n')
+    file.write('空气温度(℃) ' + temperature + '\n')
     file.write('风向(度) ' + wind_direction + '\n')
-    file.write('风速(m/s) ' + wind_dict[wind_speed] + '\n')
-    file.write('空气温度(℃) ' + temperature)
+    file.write('风速(m/s) ' + wind_dict[wind_speed])
