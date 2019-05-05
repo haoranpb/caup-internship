@@ -101,10 +101,14 @@ def send_mail():
     with open(os.path.join('./', 'reciever.txt'), 'r', encoding="utf-8") as file:
         for line in file:
             recievers.append(line.strip('\n'))
-    print('here')
+
     for i in range(len(recievers)):
         msg.recipients = [recievers[i]]
-        mail.send(msg)
+        try:
+            mail.send(msg)
+        except:
+            pass
+        print(int(document['time']))
         time.sleep(int(document['time']))
     return 'Successful!'
 
@@ -157,12 +161,6 @@ def crwal():
     json_body['1866'] = tmp
 
     return json.dumps(json_body)
-    # webpage = requests.get('https://www.tianqi.com/xujiahui/')
-    # soup = BeautifulSoup(webpage.text, 'lxml')
-    # element = soup.find('dd', attrs={'class': 'shidu'}).text
-    # temperature = next(soup.find('p', attrs={'class': 'now'}).children).text
-    
-
 
 
 if __name__ == "__main__":
