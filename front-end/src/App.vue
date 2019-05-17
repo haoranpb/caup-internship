@@ -8,6 +8,7 @@
           <router-link to="/stlparser">STL文件处理</router-link>
           <router-link to="/display/d1">气象展示系统</router-link>
           <router-link to="/mail">自动邮件系统</router-link>
+          <router-link to="/log">树木登记系统</router-link>
         </div>
       </el-header>
       <el-main>

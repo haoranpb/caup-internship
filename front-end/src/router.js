@@ -10,6 +10,8 @@ import Display4 from './components/display-4.vue'
 import Display5 from './components/display-5.vue'
 import STLParser from './views/STLParser.vue'
 import Mail from './views/Mail.vue'
+import Log from './views/Log.vue'
+import TreeManager from './views/TreeManager.vue'
 
 Vue.use(Router)
 
@@ -26,6 +28,16 @@ export default new Router({
       path: '/mail',
       name: 'mail',
       component: Mail
+    },
+    {
+      path: '/log',
+      name: 'log',
+      component: Log
+    },
+    {
+      path: '/tree',
+      name: 'tree',
+      component: TreeManager
     },
     {
       path: '/txt-getter',

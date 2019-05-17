@@ -8,6 +8,8 @@ from flask_cors import CORS
 from flask_mail import Mail, Message
 from werkzeug.utils import secure_filename
 from bs4 import BeautifulSoup
+from pymongo import MongoClient
+
 
 app = Flask(__name__)
 CORS(app)
@@ -108,7 +110,6 @@ def send_mail():
             mail.send(msg)
         except:
             pass
-        print(int(document['time']))
         time.sleep(int(document['time']))
     return 'Successful!'
 
@@ -161,6 +162,16 @@ def crwal():
     json_body['1866'] = tmp
 
     return json.dumps(json_body)
+
+# For web course
+@app.route('/getfilm', methods=['GET'])
+def get_film():
+    client = MongoClient('106.14.185.200', 27017)
+    DB = client['web']
+    FILM = DB['film']
+    j = request.args.get('iter')
+    result = list(FILM.find({}, limit=200, skip=int(j)))
+    return json.dumps(result, indent=2)
 
 
 if __name__ == "__main__":
