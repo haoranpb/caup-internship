@@ -23,7 +23,7 @@ s = requests.Session()
 r = s.get('http://cloud.ssiot.com/Login/jlst', headers=Headers)
 r = s.post('http://cloud.ssiot.com/Login/jlst', data=form_data, headers=Headers)
 # 获取气象站数据
-r = s.get('http://cloud.ssiot.com/Ajax/Get/AjaxGetJsonLastDataByNodenolist.ashx?filter=GetLastDataByNodenolistalarm&nodenos=1865', headers=Headers)
+r = s.get('http://cloud.ssiot.com/Ajax/Get/AjaxGetJsonLastDataByNodenolist.ashx?filter=GetLastDataByNodenolistalarm&nodenos=1866', headers=Headers)
 datas = json.loads(r.text)
 
 direction = ''
@@ -37,5 +37,5 @@ for data in datas['Rows']:
         pass
 
 requests.get('http://www.wf-bldgtech.com/wdata_check2.php? \
-    id=WFupload&pw=m23dwq&nid=7&wspeed=' + speed + '&direct=' + direction)
+    id=WFupload&pw=m23dwq&nid=5&wspeed=' + str(speed) + '&direct=' + str(direction))
 # http://www.wf-bldgtech.com/wdata_check2.php?id=WFupload&pw=m23dwq&nid=7&wspeed=1.3&direct=2

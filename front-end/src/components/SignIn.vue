@@ -20,8 +20,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   data(){
     var validate = (rule, value, callback) => {

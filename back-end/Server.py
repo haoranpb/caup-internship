@@ -11,6 +11,7 @@ from bs4 import BeautifulSoup
 from pymongo import MongoClient
 
 
+
 app = Flask(__name__)
 CORS(app)
 
@@ -172,6 +173,15 @@ def get_film():
     j = request.args.get('iter')
     result = list(FILM.find({}, limit=200, skip=int(j)))
     return json.dumps(result, indent=2)
+
+@app.route('/getpic', methods=['GET'])
+def get_pic():
+    webpage = requests.get('https://www.wf-bldgtech.com/pictest.php')
+    soup = BeautifulSoup(webpage.text, 'lxml')
+    element = soup.find_all('td')
+    for i in range(len(element)):
+        if element[i].text == '6':
+            return element[i+1].text
 
 
 if __name__ == "__main__":
