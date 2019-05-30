@@ -1,5 +1,6 @@
 import json
 import requests
+import math
 
 
 Headers = {
@@ -36,6 +37,10 @@ for data in datas['Rows']:
     else:
         pass
 
+direction = math.floor((direction + 11.25)/22.5)
+if direction > 15:
+    direction -= 1
+
 requests.get('http://www.wf-bldgtech.com/wdata_check2.php? \
-    id=WFupload&pw=m23dwq&nid=5&wspeed=' + str(speed) + '&direct=' + str(direction))
+        id=WFupload&pw=m23dwq&nid=5&wspeed=' + str(speed) + '&direct=' + str(direction))
 # http://www.wf-bldgtech.com/wdata_check2.php?id=WFupload&pw=m23dwq&nid=7&wspeed=1.3&direct=2
