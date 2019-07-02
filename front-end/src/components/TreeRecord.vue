@@ -1,6 +1,17 @@
 <template>
   <div class="tree">
+    <el-form :inline="true" :model="getForm" class="get-form">
+      <el-form-item label="ID">
+        <el-input v-model="getForm.id" placeholder="ID"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="search">查询</el-button>
+      </el-form-item>
+    </el-form>
     <el-form :inline="true" :model="form" label-width="100px">
+      <el-form-item label="表单ID">
+        <el-input v-model="form.id"></el-input>
+      </el-form-item>
       <el-form-item label="树木编号">
         <el-input v-model="form.number"></el-input>
       </el-form-item>
@@ -215,6 +226,9 @@ import { constants } from 'crypto';
 export default {
   data() {
     return {
+      getForm: {
+        id: 2
+      },
       form: {
         number: 0,
         oldNum: 0,
@@ -282,12 +296,32 @@ export default {
       .catch(function () {
         self.$message.error('糟糕，哪里出了点问题！');
       });
+    },
+    search(){
+      let self = this;
+
+      axios({
+        method: 'post',
+        url: 'http://47.100.50.80:8077/getTreeRecord',
+        data: self.getForm.id,
+        headers: { 'Content-Type': 'application/json' }
+      })
+      .then(function (response) {
+        console.log(response);
+        self.form = response.data;
+      })
+      .catch(function () {
+        self.$message.error('糟糕，哪里出了点问题！');
+      });
     }
   }
 }
 </script>
 
 <style scoped>
+.get-form{
+  text-align: center;
+}
 .tree{
   margin-left: 20%;
   margin-right: 20%;
