@@ -50,7 +50,7 @@ export default {
   methods: {
     SignIn: function(){
       if(this.form.usr=='caup'&&this.form.pwd=='sse'){
-        this.$router.push('/tree');
+        this.$router.push('/tree/tree-record');
       }
       else{
         this.$message.error('用户名或密码错误！');

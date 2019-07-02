@@ -12,6 +12,10 @@ import STLParser from './views/STLParser.vue'
 import Mail from './views/Mail.vue'
 import Log from './views/Log.vue'
 import TreeManager from './views/TreeManager.vue'
+import TreeRecord from './components/TreeRecord.vue'
+import TreeMaintain from './components/TreeMaintain.vue'
+import TreeDanger from './components/TreeDanger.vue'
+
 
 Vue.use(Router)
 
@@ -37,7 +41,24 @@ export default new Router({
     {
       path: '/tree',
       name: 'tree',
-      component: TreeManager
+      component: TreeManager,
+      children: [
+        {
+          path: 'tree-record',
+          name: 'tree-record',
+          component: TreeRecord
+        },
+        {
+          path: 'tree-danger',
+          name: 'tree-danger',
+          component: TreeDanger
+        },
+        {
+          path: 'tree-maintain',
+          name: 'tree-maintain',
+          component: TreeMaintain
+        }
+      ]
     },
     {
       path: '/txt-getter',
