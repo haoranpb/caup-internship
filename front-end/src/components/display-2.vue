@@ -52,7 +52,7 @@ export default {
         obj.tableData.push(tmp);
       }
 
-      axios.get('http://ludanxer.top/projects/caup/xuhui.txt')
+      axios.get('http://ludanxer.top/xuhui.txt')
       .then(function(r) {
         let data = r.data.split('\n');
         for(let i in data){
