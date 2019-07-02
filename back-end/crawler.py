@@ -5,7 +5,15 @@ import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
 
-webpage = requests.get('https://www.tianqi.com/xujiahui/')
+Headers = {
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36',
+    'Accept-Language': 'en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6',
+    'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+    'Accept-Encoding': 'gzip, deflate',
+    'Connection': 'keep-alive',
+}
+
+webpage = requests.get('https://www.tianqi.com/xujiahui/', headers=Headers)
 soup = BeautifulSoup(webpage.text, 'lxml')
 element = soup.find('dd', attrs={'class': 'shidu'}).text
 temperature = next(soup.find('p', attrs={'class': 'now'}).children).text
